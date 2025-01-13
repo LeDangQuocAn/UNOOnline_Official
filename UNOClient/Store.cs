@@ -23,12 +23,14 @@ namespace UnoOnline
         }
         public int Card1Value = 0;
         int Card2Value = 200;
+        private static string currentSkin = "Card1";
         private void Card1_Click(object sender, EventArgs e)
         {
             if (GameManager.Instance.Players[0].Money >= Card1Value)
             {
                 GameManager.Instance.Players[0].Money -= Card1Value;
                 MessageBox.Show("You have bought this card.");
+                currentSkin = "Card1";
             }
             else
             {
@@ -44,11 +46,16 @@ namespace UnoOnline
                 SetMoneyLabel();
                 ClientSocket.SendData(new Message(MessageType.BuyCard, new List<string> {GameManager.Instance.Players[0].Name, "-200"}));
                 MessageBox.Show("You have bought this card.");
+                currentSkin = "Card2";
             }
             else
             {
                 MessageBox.Show("You don't have enough money to buy this card.");
             }
+        }
+        public static string GetCurrentSkin()
+        {
+            return currentSkin;
         }
     }
 }

@@ -131,8 +131,14 @@ namespace UnoOnline
                         Form1 form1 = new Form1();
                         form1.Show();
                         form1.DisplayPlayerHand(Instance.Players[0].Hand);
-                        form1.UpdateCurrentCardDisplay(Instance.CurrentCard);
-
+                        if(Store.GetCurrentSkin() == "Card1")
+                        {
+                            form1.UpdateCurrentCardDisplay(Instance.CurrentCard);
+                        }
+                        else
+                        {
+                            form1.UpdateCurrentCard2Display(Instance.CurrentCard);
+                        }
                         form1.InitializeDeckImages();
                         form1.DisableCardAndDrawButton();
                         form1.DisableColorButtons();
@@ -249,13 +255,13 @@ namespace UnoOnline
                 {
                     form1.Invoke(new Action(() =>
                     {
-                        if (Instance.CurrentCard != null)
+                        if (Store.GetCurrentSkin() == "Card1")
                         {
                             form1.UpdateCurrentCardDisplay(Instance.CurrentCard);
                         }
                         else
                         {
-                            MessageBox.Show("CurrentCard is null.");
+                            form1.UpdateCurrentCard2Display(Instance.CurrentCard);
                         }
                         form1.InitializeDeckImages(); // Refresh the deck images and labels
                     }));

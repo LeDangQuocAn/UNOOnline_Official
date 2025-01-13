@@ -57,7 +57,28 @@ namespace UnoOnline
                 currentCardPictureBox.Image = Image.FromFile(cardImagePath);
             }
         }
+        public void UpdateCurrentCard2Display(Card currentCard)
+        {
+            string cardImagePath = "";
+            if (currentCard.CardName.Contains("Wild"))
+            {
+                if (currentCard.Value == "Draw")
+                    cardImagePath = Path.Combine("Resources", "CardImages2", "Wild_Draw.png");
+                else
+                    cardImagePath = Path.Combine("Resources", "CardImages2", "Wild.png");
+            }
+            else
+            {
+                // Construct the file path for the card image
+                cardImagePath = Path.Combine("Resources", "CardImages2", $"{currentCard.Color}_{currentCard.Value}.png");
+            }
 
+            if (File.Exists(cardImagePath))
+            {
+                // Load the image into the PictureBox
+                currentCardPictureBox.Image = Image.FromFile(cardImagePath);
+            }
+        }
 
         // Thêm method hiển thị chat
         public void AddChatMessage(string sender, string message)
@@ -321,13 +342,10 @@ namespace UnoOnline
                 }
 
                 System.Diagnostics.Debug.WriteLine("Displaying card: " + card.CardName);
-
                 Button cardButton = new Button
                 {
                     Size = new Size(cardWidth, cardHeight),
                     Location = new Point(xOffset, yOffset),
-                    BackgroundImage = GetCardImage(card),
-                    BackgroundImageLayout = ImageLayout.Stretch,
                     FlatStyle = FlatStyle.Flat,
                     Tag = card,
                     BackColor = Color.White,
@@ -337,11 +355,22 @@ namespace UnoOnline
                 cardButton.FlatAppearance.MouseOverBackColor = Color.LightGray;
                 cardButton.FlatAppearance.BorderSize = 1;
 
+                if (Store.GetCurrentSkin() == "Card1")
+                {
+                    cardButton.BackgroundImage = GetCardImage(card);
+                }
+                else
+                {
+                    cardButton.BackgroundImage = GetCard2Image(card);
+                }
+
+                cardButton.BackgroundImageLayout = ImageLayout.Stretch;
+
                 cardButton.Click += CardButton_Click;
 
                 PlayerHandPanel.Controls.Add(cardButton);
 
-                xOffset += cardWidth + 5; // Space between cards
+                xOffset += cardWidth + 5;
             }
         }
         private Image GetCardImage(Card card)
@@ -366,6 +395,39 @@ namespace UnoOnline
             {
                 // Đối với các lá bài màu
                 cardImagePath = Path.Combine("Resources", "CardImages", $"{card.Color}_{card.Value}.png");
+            }
+
+            if (File.Exists(cardImagePath))
+            {
+                return Image.FromFile(cardImagePath);
+            }
+            else
+            {
+                MessageBox.Show($"Card image not found: {cardImagePath}");
+                return null;
+            }
+        }
+        private Image GetCard2Image(Card card)
+        {
+            if (card == null)
+            {
+                MessageBox.Show("Card is null in GetCardImage.");
+                return null;
+            }
+            string cardImagePath = "";
+
+            // Xử lý các thẻ đặc biệt như "Wild"
+            if (card.Color == "Wild")
+            {
+                if (card.Value == "Draw")
+                    cardImagePath = Path.Combine("Resources", "CardImages2", "Wild_Draw.png");
+                else
+                    cardImagePath = Path.Combine("Resources", "CardImages2", "Wild.png");
+            }
+            else
+            {
+                // Đối với các lá bài màu
+                cardImagePath = Path.Combine("Resources", "CardImages2", $"{card.Color}_{card.Value}.png");
             }
 
             if (File.Exists(cardImagePath))
@@ -410,7 +472,14 @@ namespace UnoOnline
                 }
                 GameManager.Instance.CurrentCard = selectedCard;
                 GameManager.Instance.Players[0].Hand.Remove(selectedCard);
-                UpdateCurrentCardDisplay(selectedCard);
+                if(Store.GetCurrentSkin() == "Card1")
+                {
+                    UpdateCurrentCardDisplay(selectedCard);
+                }
+                else
+                {
+                    UpdateCurrentCard2Display(selectedCard);
+                }
                 PlayerHandPanel.Controls.Remove(clickedButton);
                 DisableCardAndDrawButton();
             }
