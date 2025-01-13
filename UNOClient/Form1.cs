@@ -270,7 +270,8 @@ namespace UnoOnline
                 Size = new Size(50, 50),
                 BackColor = Color.Red,
                 FlatStyle = FlatStyle.Flat,
-                Location = new Point(currentCardPictureBox.Right + 10, currentCardPictureBox.Bottom - 110)
+                Location = new Point(currentCardPictureBox.Right + 10, currentCardPictureBox.Bottom - 110),
+                Visible = false
             };
             Controls.Add(redButton);
             redButton.Click += RedButton_Click;
@@ -280,7 +281,8 @@ namespace UnoOnline
                 Size = new Size(50, 50),
                 BackColor = Color.Green,
                 FlatStyle = FlatStyle.Flat,
-                Location = new Point(currentCardPictureBox.Right + 70, currentCardPictureBox.Bottom - 110)
+                Location = new Point(currentCardPictureBox.Right + 70, currentCardPictureBox.Bottom - 110),
+                Visible = false
             };
             Controls.Add(greenButton);
             greenButton.Click += GreenButton_Click;
@@ -290,7 +292,8 @@ namespace UnoOnline
                 FlatStyle = FlatStyle.Flat,
                 Size = new Size(50, 50),
                 BackColor = Color.Yellow,
-                Location = new Point(currentCardPictureBox.Right + 10, currentCardPictureBox.Bottom - 50)
+                Location = new Point(currentCardPictureBox.Right + 10, currentCardPictureBox.Bottom - 50),
+                Visible = false
             };
             Controls.Add(yellowButton);
             yellowButton.Click += YellowButton_Click;
@@ -300,7 +303,8 @@ namespace UnoOnline
                 FlatStyle = FlatStyle.Flat,
                 Size = new Size(50, 50),
                 BackColor = Color.Blue,
-                Location = new Point(currentCardPictureBox.Right + 70, currentCardPictureBox.Bottom - 50)
+                Location = new Point(currentCardPictureBox.Right + 70, currentCardPictureBox.Bottom - 50),
+                Visible = false
             };
             Controls.Add(blueButton);
             blueButton.Click += BlueButton_Click;
@@ -309,6 +313,22 @@ namespace UnoOnline
 
             // Initialize chat panel
             InitializeChatPanel();
+        }
+
+        private void EnableColorButtons()
+        {
+            redButton.Visible = true;
+            greenButton.Visible = true;
+            yellowButton.Visible = true;
+            blueButton.Visible = true;
+        }
+
+        public void DisableColorButtons()
+        {
+            redButton.Visible = false;
+            greenButton.Visible = false;
+            yellowButton.Visible = false;
+            blueButton.Visible = false;
         }
 
         private void yellUNOButton_Click(object sender, EventArgs e)
@@ -440,20 +460,7 @@ namespace UnoOnline
                 return null;
             }
         }
-        private void EnableColorButtons()
-        {
-            redButton.Enabled = true;
-            greenButton.Enabled = true;
-            yellowButton.Enabled = true;
-            blueButton.Enabled = true;
-        }
-        public void DisableColorButtons()
-        {
-            redButton.Enabled = false;
-            greenButton.Enabled = false;
-            yellowButton.Enabled = false;
-            blueButton.Enabled = false;
-        }
+        
         
         private void CardButton_Click(object sender, EventArgs e)
         {
@@ -501,21 +508,21 @@ namespace UnoOnline
             GameManager.Instance.CurrentCard.Color = "Green";
             ClientSocket.SendData(new Message(MessageType.DanhBai, new List<string> { GameManager.Instance.Players[0].Name, (GameManager.Instance.Players[0].Hand.Count).ToString(), GameManager.Instance.CurrentCard.CardName, GameManager.Instance.CurrentCard.Color }));
             DisableColorButtons();
-            DisableCardAndDrawButton();
+            EnableCardAndDrawButton();
         }
         private void YellowButton_Click(object sender, EventArgs e)
         {
             GameManager.Instance.CurrentCard.Color = "Yellow";
             ClientSocket.SendData(new Message(MessageType.DanhBai, new List<string> { GameManager.Instance.Players[0].Name, (GameManager.Instance.Players[0].Hand.Count).ToString(), GameManager.Instance.CurrentCard.CardName, GameManager.Instance.CurrentCard.Color }));
             DisableColorButtons();
-            DisableCardAndDrawButton();
+            EnableCardAndDrawButton();
         }
         private void BlueButton_Click(object sender, EventArgs e)
         {
             GameManager.Instance.CurrentCard.Color = "Blue";
             ClientSocket.SendData(new Message(MessageType.DanhBai, new List<string> { GameManager.Instance.Players[0].Name, (GameManager.Instance.Players[0].Hand.Count).ToString(), GameManager.Instance.CurrentCard.CardName, GameManager.Instance.CurrentCard.Color }));
             DisableColorButtons();
-            DisableCardAndDrawButton();
+            EnableCardAndDrawButton();
         }
         private void DrawCardButton_Click(object sender, EventArgs e)
         {
