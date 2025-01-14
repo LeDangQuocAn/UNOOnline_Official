@@ -48,21 +48,23 @@
             // 
             // Card1
             // 
+            this.Card1.BackgroundImage = global::UnoOnline.Properties.Resources.Blue_1;
+            this.Card1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Card1.Location = new System.Drawing.Point(58, 260);
             this.Card1.Name = "Card1";
             this.Card1.Size = new System.Drawing.Size(161, 245);
             this.Card1.TabIndex = 1;
-            this.Card1.Text = "Card1";
             this.Card1.UseVisualStyleBackColor = true;
             this.Card1.Click += new System.EventHandler(this.Card1_Click);
             // 
             // Card2
             // 
-            this.Card2.Location = new System.Drawing.Point(336, 260);
+            this.Card2.BackgroundImage = global::UnoOnline.Properties.Resources.Green_21;
+            this.Card2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Card2.Location = new System.Drawing.Point(341, 259);
             this.Card2.Name = "Card2";
             this.Card2.Size = new System.Drawing.Size(161, 246);
             this.Card2.TabIndex = 2;
-            this.Card2.Text = "Card2";
             this.Card2.UseVisualStyleBackColor = true;
             this.Card2.Click += new System.EventHandler(this.Card2_Click);
             // 
