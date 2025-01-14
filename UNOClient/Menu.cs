@@ -46,28 +46,17 @@ namespace UnoOnline
             Application.Exit();
         }
 
-        private void BtnExit_Click(object sender, EventArgs e)
+        private void BtnStore_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var message = new Message(MessageType.Disconnect, new List<string> { Program.player.Name });
-                ClientSocket.SendData(message);
-                ClientSocket.Disconnect();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error during disconnect: {ex.Message}");
-            }
-            Environment.Exit(0);
-            Application.Exit();
+            Store store = new Store();
+            store.Show();
         }
 
         private void BtnRules_Click(object sender, EventArgs e)
         {
             //Sẽ mở trang web chứa luật chơi-https://www.unorules.com/
-            //System.Diagnostics.Process.Start("https://www.unorules.com/");
-            Store store = new Store();
-            store.Show();
+            System.Diagnostics.Process.Start("https://www.unorules.com/");
+            
         }
     }
 }

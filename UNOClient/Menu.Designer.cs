@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.BtnJoinGame = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.BtnExit = new System.Windows.Forms.Button();
+            this.BtnStore = new System.Windows.Forms.Button();
             this.BtnRules = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -54,16 +54,16 @@
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
-            // BtnExit
+            // BtnStore
             // 
-            this.BtnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnExit.Location = new System.Drawing.Point(541, 212);
-            this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(100, 100);
-            this.BtnExit.TabIndex = 2;
-            this.BtnExit.Text = "Exit";
-            this.BtnExit.UseVisualStyleBackColor = true;
-            this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
+            this.BtnStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnStore.Location = new System.Drawing.Point(541, 212);
+            this.BtnStore.Name = "BtnStore";
+            this.BtnStore.Size = new System.Drawing.Size(100, 100);
+            this.BtnStore.TabIndex = 2;
+            this.BtnStore.Text = "Store";
+            this.BtnStore.UseVisualStyleBackColor = true;
+            this.BtnStore.Click += new System.EventHandler(this.BtnStore_Click);
             // 
             // BtnRules
             // 
@@ -84,7 +84,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.BtnRules);
-            this.Controls.Add(this.BtnExit);
+            this.Controls.Add(this.BtnStore);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.BtnJoinGame);
             this.DoubleBuffered = true;
@@ -99,7 +99,7 @@
 
         private System.Windows.Forms.Button BtnJoinGame;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button BtnExit;
+        private System.Windows.Forms.Button BtnStore;
         private System.Windows.Forms.Button BtnRules;
     }
 }
