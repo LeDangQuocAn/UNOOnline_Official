@@ -39,8 +39,7 @@ namespace UNOServer
             Console.OutputEncoding = System.Text.Encoding.UTF8; //Sử dụng console để cập nhật thông tin (tiện theo dõi bên server)
             IPAddress IPaddress = IPAddress.Any;
             ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); //Tạo socket cho server
-            //loopback 127.0.0.1
-            IPEndPoint ServerEP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 11000);
+            IPEndPoint ServerEP = new IPEndPoint(IPaddress, 11000); //Tạo endpoint với IP của host và cổng
             ServerSocket.Bind(ServerEP); //Socket server kết nối đến endpoint đó => địa chỉ của server
             ServerSocket.Listen(4);
             Console.WriteLine("Server đã được tạo và đang chạy! Đợi các kết nối từ Clients...");

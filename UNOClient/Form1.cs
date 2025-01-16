@@ -188,8 +188,6 @@ namespace UnoOnline
 
         private void InitializeGameBoard()
         {
-
-
             clientInfoLabel = new Label
             {
                 Size = new Size(200, 30),
@@ -395,14 +393,7 @@ namespace UnoOnline
         }
         private Image GetCardImage(Card card)
         {
-            if (card == null)
-            {
-                MessageBox.Show("Card is null in GetCardImage.");
-                return null;
-            }
-
             string cardImagePath = "";
-
             // Xử lý các thẻ đặc biệt như "Wild"
             if (card.Color == "Wild")
             {
@@ -429,11 +420,6 @@ namespace UnoOnline
         }
         private Image GetCard2Image(Card card)
         {
-            if (card == null)
-            {
-                MessageBox.Show("Card is null in GetCardImage.");
-                return null;
-            }
             string cardImagePath = "";
 
             // Xử lý các thẻ đặc biệt như "Wild"
@@ -664,7 +650,10 @@ namespace UnoOnline
             }
 
             Image deckImage = Image.FromFile(@"Resources\CardImages\Deck.png");
-
+            if(Store.GetCurrentSkin() == "Card2")
+            {
+                deckImage = Image.FromFile(@"Resources\CardImages2\Deck.png");
+            }
             for (int i = 1; i < GameManager.Instance.Players.Count; i++) // Start from 1 to skip the current player
             {
                 var player = GameManager.Instance.Players[i];
